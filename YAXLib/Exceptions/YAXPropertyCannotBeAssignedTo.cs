@@ -58,7 +58,7 @@ public class YAXPropertyCannotBeAssignedTo : YAXDeserializationException
     /// The error message that explains the reason for the exception, or an empty string("").
     /// </returns>
     public override string Message => string.Format(CultureInfo.CurrentCulture,
-        "Could not assign to the property '{0}'.{1}\n{2}", PropertyName, LineInfoMessage, _innerException);
+        "Could not assign to the property '{0}'.{1}\n\n_innerException:{2}", PropertyName, LineInfoMessage, _innerException);
 
     #endregion
 }
