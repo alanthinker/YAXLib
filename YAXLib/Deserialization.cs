@@ -257,11 +257,11 @@ internal class Deserialization
         {
             member.SetValue(resultObject, desObj);
         }
-        catch
+        catch(Exception ex)
         {
             OnExceptionOccurred(
                 new YAXPropertyCannotBeAssignedTo(member.Alias.LocalName,
-                    GetXmlLineInfo(xAttributeValue, xElementValue, baseElement)),
+                    GetXmlLineInfo(xAttributeValue, xElementValue, baseElement), ex),
                 _serializer.Options.ExceptionBehavior);
         }
     }
@@ -684,9 +684,9 @@ internal class Deserialization
             member.SetValue(obj, convertedObj);
             return true;
         }
-        catch
+        catch (Exception ex)
         {
-            OnExceptionOccurred(new YAXPropertyCannotBeAssignedTo(member.Alias.LocalName, xElementValue),
+            OnExceptionOccurred(new YAXPropertyCannotBeAssignedTo(member.Alias.LocalName, xElementValue, ex),
                 _serializer.Options.ExceptionBehavior);
         }
 
@@ -712,9 +712,9 @@ internal class Deserialization
                 member.SetValue(obj, convertedObj);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                OnExceptionOccurred(new YAXPropertyCannotBeAssignedTo(member.Alias.LocalName, xElementValue),
+                OnExceptionOccurred(new YAXPropertyCannotBeAssignedTo(member.Alias.LocalName, xElementValue, ex),
                     _serializer.Options.ExceptionBehavior);
             }
         }
@@ -1235,9 +1235,9 @@ internal class Deserialization
         {
             member.SetValue(o, colObject);
         }
-        catch
+        catch (Exception ex)
         {
-            OnExceptionOccurred(new YAXPropertyCannotBeAssignedTo(member.Alias.LocalName, xelemValue),
+            OnExceptionOccurred(new YAXPropertyCannotBeAssignedTo(member.Alias.LocalName, xelemValue, ex),
                 _serializer.Options.ExceptionBehavior);
         }
     }
@@ -1469,9 +1469,9 @@ internal class Deserialization
         {
             member.SetValue(o, dic);
         }
-        catch
+        catch (Exception ex)
         {
-            OnExceptionOccurred(new YAXPropertyCannotBeAssignedTo(member.Alias.LocalName, xelemValue),
+            OnExceptionOccurred(new YAXPropertyCannotBeAssignedTo(member.Alias.LocalName, xelemValue, ex),
                 _serializer.Options.ExceptionBehavior);
         }
     }

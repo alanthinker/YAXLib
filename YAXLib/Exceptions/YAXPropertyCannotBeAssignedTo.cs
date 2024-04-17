@@ -1,6 +1,7 @@
 ﻿// Copyright (C) Sina Iravanian, Julian Verdurmen, axuno gGmbH and other contributors.
 // Licensed under the MIT license.
 
+using System;
 using System.Globalization;
 using System.Xml;
 
@@ -13,14 +14,17 @@ namespace YAXLib.Exceptions;
 /// </summary>
 public class YAXPropertyCannotBeAssignedTo : YAXDeserializationException
 {
+
+    Exception _innerException;
+
     #region Constructors
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YAXPropertyCannotBeAssignedTo" /> class.
     /// </summary>
     /// <param name="propName">Name of the property.</param>
-    public YAXPropertyCannotBeAssignedTo(string propName) :
-        this(propName, null)
+    public YAXPropertyCannotBeAssignedTo(string propName, Exception innerException) :
+        this(propName, null, innerException)
     {
     }
 
@@ -29,10 +33,11 @@ public class YAXPropertyCannotBeAssignedTo : YAXDeserializationException
     /// </summary>
     /// <param name="propName">Name of the property.</param>
     /// <param name="lineInfo">IXmlLineInfo derived object, e.g. XElement, XAttribute containing line info</param>
-    public YAXPropertyCannotBeAssignedTo(string propName, IXmlLineInfo? lineInfo) :
+    public YAXPropertyCannotBeAssignedTo(string propName, IXmlLineInfo? lineInfo, Exception innerException) :
         base(lineInfo)
     {
         PropertyName = propName;
+        _innerException = innerException;
     }
 
     #endregion
@@ -53,7 +58,7 @@ public class YAXPropertyCannotBeAssignedTo : YAXDeserializationException
     /// The error message that explains the reason for the exception, or an empty string("").
     /// </returns>
     public override string Message => string.Format(CultureInfo.CurrentCulture,
-        "Could not assign to the property '{0}'.{1}", PropertyName, LineInfoMessage);
+        "Could not assign to the property '{0}'.{1}\n{2}", PropertyName, LineInfoMessage, _innerException);
 
     #endregion
 }
