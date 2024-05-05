@@ -275,7 +275,7 @@ internal class Deserialization
 
         if (_serializer.Options.UseOriginalPropertyValue)
         {
-            return true;
+            return false;
         }
 
         // set default value, otherwise existing value for the member is kept
