@@ -27,6 +27,7 @@ class Address
 {
     public int Id { get; set; } = 1;
     public string? Name { get; set; }
+    public AddressType AddressType { get; set; } = AddressType.Type2;
     public string? NoSetter
     {
         get
@@ -34,4 +35,9 @@ class Address
             return "NoSetter";
         }
     }
+}
+
+enum AddressType
+{
+    Type0, Type1, Type2, Type3, Type4, Type5,
 }

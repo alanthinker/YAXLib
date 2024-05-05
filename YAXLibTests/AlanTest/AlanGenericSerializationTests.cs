@@ -45,7 +45,7 @@ public class AlanGenericSerializationTests
 
     static Student GetTestStudent3()
     {
-        return new Student() { MathTeacher = new Teacher(), Address = new Address() { Name="addr" } };
+        return new Student() { MathTeacher = new Teacher(), Address = new Address() { Name = "addr" } };
     }
 
     [Test]
@@ -88,6 +88,7 @@ public class AlanGenericSerializationTests
                   <Address>
                     <Id>1</Id>
                     <Name />
+                    <AddressType>Type2</AddressType>
                   </Address>
                 </Student>
                 """;
@@ -167,12 +168,20 @@ public class AlanGenericSerializationTests
                   <MathTeacher>
                     <Id>0</Id>
                   </MathTeacher>
+                  <Address> 
+                  </Address>
                 </Student>
                 """;
+
+        // 注意   <Address/>   表示 null 对象
+        // 而   <Address></Address>   则表示默认构造函数生成的对象.
+
         var serializer = new YAXSerializer<Student>(MyYAXSerializerHelper.DefaultSerializerOptions);
         var got = serializer.Deserialize(xml);
         Assert.That(got, Is.Not.Null);
         Assert.IsTrue(got.Name == "Jim");
         Assert.IsTrue(got?.MathTeacher?.Name == "Lucy");
+        Assert.IsTrue(got?.Address?.Id == 1);
+        Assert.IsTrue(got?.Address?.AddressType == AddressType.Type2);
     }
 }
