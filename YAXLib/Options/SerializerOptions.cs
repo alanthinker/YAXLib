@@ -85,4 +85,7 @@ public class SerializerOptions
     /// customization.
     /// </summary>
     public ITypeInspector TypeInspector { get; set; }
+
+    // 保留 resultObject 默认构造函数创建对象后, 原有的该属性的值.  比如  public string Name { get; set; } = "Abc"; 该值就是 "Abc"
+    public bool UseOriginalPropertyValue { get; set; }
 }

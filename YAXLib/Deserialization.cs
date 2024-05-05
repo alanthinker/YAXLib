@@ -257,7 +257,7 @@ internal class Deserialization
         {
             member.SetValue(resultObject, desObj);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             OnExceptionOccurred(
                 new YAXPropertyCannotBeAssignedTo(member.Alias.LocalName,
@@ -272,6 +272,11 @@ internal class Deserialization
         // i.e. if it was NOT resuming deserialization,
         if (_deserializationObject != null)
             return false;
+
+        if (_serializer.Options.UseOriginalPropertyValue)
+        {
+            return true;
+        }
 
         // set default value, otherwise existing value for the member is kept
 
@@ -341,7 +346,7 @@ internal class Deserialization
 
         if ((member.IsTreatedAsCollection || member.IsTreatedAsDictionary) &&
             member.CollectionAttributeInstance is
-                { SerializationType: YAXCollectionSerializationTypes.RecursiveWithNoContainingElement })
+            { SerializationType: YAXCollectionSerializationTypes.RecursiveWithNoContainingElement })
         {
             if (AtLeastOneOfCollectionMembersExists(baseElement, member))
             {
@@ -631,7 +636,7 @@ internal class Deserialization
         // containing the collection, not the collection itself. That's because the containing element of collection is not
         // serialized. In this case the flag `isRealTypeAttributeNotRelevant` is set to true.
         var isRealTypeAttributeNotRelevant = member.CollectionAttributeInstance is
-            { SerializationType: YAXCollectionSerializationTypes.RecursiveWithNoContainingElement };
+        { SerializationType: YAXCollectionSerializationTypes.RecursiveWithNoContainingElement };
 
         GetRealTypeIfSpecified(xElementValue, isRealTypeAttributeNotRelevant, ref memberType);
 
@@ -829,7 +834,7 @@ internal class Deserialization
         var isPrimitive = ReflectionUtils.IsBasicType(collItemType);
 
         if (isPrimitive && collAttrInstance is
-                { SerializationType: YAXCollectionSerializationTypes.Serially })
+            { SerializationType: YAXCollectionSerializationTypes.Serially })
         {
             // The collection was serialized serially
             GetSerialCollectionItems(xElement, memberAlias, collAttrInstance, collItemType, dataItems);

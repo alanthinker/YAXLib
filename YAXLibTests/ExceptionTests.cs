@@ -21,7 +21,8 @@ internal class ExceptionTests
     {
         var ex = Assert.Throws<YAXAttributeAlreadyExistsException>(() =>
         {
-            var serializer = new YAXSerializer<ClassWithDuplicateYaxAttribute>(new SerializerOptions {
+            var serializer = new YAXSerializer<ClassWithDuplicateYaxAttribute>(new SerializerOptions
+            {
                 ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.ThrowWarningsAndErrors,
                 ExceptionBehavior = YAXExceptionTypes.Error
             });
@@ -46,7 +47,8 @@ internal class ExceptionTests
             """;
         var ex = Assert.Throws<YAXBadlyFormedXML>(() =>
         {
-            var serializer = new YAXSerializer<Book>(new SerializerOptions {
+            var serializer = new YAXSerializer<Book>(new SerializerOptions
+            {
                 ExceptionBehavior = YAXExceptionTypes.Error,
                 ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.ThrowWarningsAndErrors
             });
@@ -66,7 +68,8 @@ internal class ExceptionTests
         const string xml =
             """<Book></MalformedXml>""";
 
-        var serializer = new YAXSerializer<Book>(new SerializerOptions {
+        var serializer = new YAXSerializer<Book>(new SerializerOptions
+        {
             ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.DoNotThrow,
             ExceptionBehavior = YAXExceptionTypes.Warning,
         });
@@ -81,7 +84,8 @@ internal class ExceptionTests
     public void DeserializeMalformedXmlFromTextReaderShouldThrow()
     {
         const string xml = """<Book></MalformedXml>""";
-        var serializer = new YAXSerializer<Book>(new SerializerOptions {
+        var serializer = new YAXSerializer<Book>(new SerializerOptions
+        {
             ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.ThrowWarningsAndErrors,
             ExceptionBehavior = YAXExceptionTypes.Warning,
             SerializationOptions = YAXSerializationOptions.SerializeNullObjects
@@ -104,7 +108,8 @@ internal class ExceptionTests
     public void DeserializeMalformedXmlFromTextReaderDoesNotThrow()
     {
         const string xml = """<Book></MalformedXml>""";
-        var serializer = new YAXSerializer<Book>(new SerializerOptions {
+        var serializer = new YAXSerializer<Book>(new SerializerOptions
+        {
             ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.DoNotThrow,
             ExceptionBehavior = YAXExceptionTypes.Warning,
             SerializationOptions = YAXSerializationOptions.SerializeNullObjects
@@ -127,7 +132,8 @@ internal class ExceptionTests
     public void DeserializeMalformedXmlFromXmlReaderShouldThrow()
     {
         const string xml = """<Book></MalformedXml>""";
-        var serializer = new YAXSerializer<Book>(new SerializerOptions {
+        var serializer = new YAXSerializer<Book>(new SerializerOptions
+        {
             ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.ThrowWarningsAndErrors,
             ExceptionBehavior = YAXExceptionTypes.Warning,
             SerializationOptions = YAXSerializationOptions.SerializeNullObjects
@@ -151,7 +157,8 @@ internal class ExceptionTests
     public void DeserializeMalformedXmlFromXmlReaderDoesNotThrow()
     {
         const string xml = """<Book></MalformedXml>""";
-        var serializer = new YAXSerializer<Book>(new SerializerOptions {
+        var serializer = new YAXSerializer<Book>(new SerializerOptions
+        {
             ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.DoNotThrow,
             ExceptionBehavior = YAXExceptionTypes.Warning,
             SerializationOptions = YAXSerializationOptions.SerializeNullObjects
@@ -187,7 +194,8 @@ internal class ExceptionTests
 
         var ex = Assert.Throws<YAXBadlyFormedInput>(() =>
         {
-            var serializer = new YAXSerializer<Book>(new SerializerOptions {
+            var serializer = new YAXSerializer<Book>(new SerializerOptions
+            {
                 ExceptionBehavior = YAXExceptionTypes.Error,
                 ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.ThrowWarningsAndErrors,
                 SerializationOptions = YAXSerializationOptions.DisplayLineInfoInExceptions
@@ -216,7 +224,8 @@ internal class ExceptionTests
 
         var ex = Assert.Throws<YAXBadlyFormedInput>(() =>
         {
-            var serializer = new YAXSerializer<Book>(new SerializerOptions {
+            var serializer = new YAXSerializer<Book>(new SerializerOptions
+            {
                 ExceptionBehavior = YAXExceptionTypes.Error,
                 ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.ThrowWarningsAndErrors
             });
@@ -233,7 +242,8 @@ internal class ExceptionTests
     {
         var ex = Assert.Throws<YAXObjectTypeMismatch>(() =>
         {
-            var serializer = new YAXSerializer(typeof(Book), new SerializerOptions {
+            var serializer = new YAXSerializer(typeof(Book), new SerializerOptions
+            {
                 ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.ThrowErrorsOnly
             });
             serializer.Serialize(new ClassWithDuplicateYaxAttribute());
@@ -261,7 +271,8 @@ internal class ExceptionTests
 
         var ex = Assert.Throws<YAXElementValueMissingException>(() =>
         {
-            var serializer = new YAXSerializer<BookClassTestingSerializeAsValue>(new SerializerOptions {
+            var serializer = new YAXSerializer<BookClassTestingSerializeAsValue>(new SerializerOptions
+            {
                 ExceptionBehavior = YAXExceptionTypes.Error,
                 ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.ThrowWarningsAndErrors,
                 SerializationOptions = YAXSerializationOptions.DisplayLineInfoInExceptions
@@ -289,7 +300,8 @@ internal class ExceptionTests
 
         var ex = Assert.Throws<YAXElementMissingException>(() =>
         {
-            var serializer = new YAXSerializer<CollectionSeriallyAsAttribute>(new SerializerOptions {
+            var serializer = new YAXSerializer<CollectionSeriallyAsAttribute>(new SerializerOptions
+            {
                 ExceptionBehavior = YAXExceptionTypes.Error,
                 ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.ThrowWarningsAndErrors,
                 SerializationOptions = YAXSerializationOptions.DisplayLineInfoInExceptions
@@ -315,7 +327,8 @@ internal class ExceptionTests
 
         var ex = Assert.Throws<YAXDefaultValueCannotBeAssigned>(() =>
         {
-            var serializer = new YAXSerializer<BookWithBadDefaultValue>(new SerializerOptions {
+            var serializer = new YAXSerializer<BookWithBadDefaultValue>(new SerializerOptions
+            {
                 ExceptionBehavior = YAXExceptionTypes.Error,
                 ExceptionHandlingPolicies = YAXExceptionHandlingPolicies.ThrowWarningsAndErrors,
                 SerializationOptions = YAXSerializationOptions.DisplayLineInfoInExceptions
@@ -389,7 +402,7 @@ internal class ExceptionTests
     {
         var testName = "Test";
         var ex = Assert.Throws<YAXPropertyCannotBeAssignedTo>(code: () =>
-            throw new YAXPropertyCannotBeAssignedTo(testName));
+            throw new YAXPropertyCannotBeAssignedTo(testName, null));
         Assert.That(ex?.Message, Does.Contain(testName));
     }
 
